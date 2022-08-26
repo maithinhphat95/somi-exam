@@ -7,10 +7,16 @@ FormAddNote.propTypes = {};
 
 function FormAddNote(props) {
   const { handleAddNote } = props;
+  // Hook
   const [note, setNote] = useState({
     noteContent: "",
     noteDate: "",
     noteTime: "",
+  });
+  const [isInput, setIsInput] = useState({
+    isContent: true,
+    isDate: true,
+    isTime: true,
   });
   const handleChangeInput = (name, value) => {
     let today = new Date();
@@ -18,21 +24,23 @@ function FormAddNote(props) {
     switch (name) {
       case "noteContent":
         setNote({ ...note, [name]: value });
+        setIsInput({ ...isInput, isContent: false });
         break;
       case "noteDate":
         if (value >= today.toISOString().split("T")[0]) {
           setNote({ ...note, [name]: value });
+          setIsInput({ ...isInput, isDate: false });
         } else {
           alert("Please don't input the day in the past");
         }
         break;
       case "noteTime":
+        setIsInput({ ...isInput, isTime: false });
+
         break;
       default:
         break;
     }
-
-    console.log(note);
   };
 
   return (
@@ -87,9 +95,9 @@ function FormAddNote(props) {
         </div>
       </div>
       <div className="form-alert">
-        <p>Bạn chưa nhập Nội Dung</p>
-        <p>Bạn chưa chọn Ngày nhắc</p>
-        <p>Bạn chưa chọn Giờ nhắc nhắc</p>
+        {isInput.isContent && <p>Bạn chưa nhập Nội Dung</p>}
+        {isInput.isDate && <p>Bạn chưa chọn Ngày nhắc</p>}
+        {isInput.isTime && <p>Bạn chưa chọn Giờ nhắc</p>}
       </div>
     </div>
   );
