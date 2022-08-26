@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import "./style.scss";
 
 FormAddNote.propTypes = {};
 
 function FormAddNote(props) {
+  const { handleAddNote } = props;
   const [note, setNote] = useState({
     noteContent: "",
     noteDate: "",
@@ -29,8 +31,10 @@ function FormAddNote(props) {
       default:
         break;
     }
+
     console.log(note);
   };
+
   return (
     <div className="add-form">
       <div className="add-form-item">
@@ -73,7 +77,13 @@ function FormAddNote(props) {
           </div>
         </div>
         <div className="form-action">
-          <button>Lưu NGày</button>
+          <button
+            onClick={() => {
+              handleAddNote(note);
+            }}
+          >
+            Lưu NGày
+          </button>
         </div>
       </div>
       <div className="form-alert">
