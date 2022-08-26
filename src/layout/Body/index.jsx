@@ -8,8 +8,12 @@ Body.propTypes = {};
 
 function Body(props) {
   const [noteList, setNoteList] = useState([]);
+  const saveData = (arr) => {
+    localStorage.setItem("data", JSON.stringify(arr));
+  };
   const handleAddNote = (obj) => {
     setNoteList([...noteList, obj]);
+    saveData(noteList);
   };
   console.log(noteList);
   return (
