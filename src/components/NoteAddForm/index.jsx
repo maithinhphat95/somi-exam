@@ -139,9 +139,11 @@ function FormAddNote(props) {
         </div>
       </div>
       <div className="form-alert">
-        {isInput.isContent && <p>Bạn chưa nhập Nội Dung</p>}
-        {isInput.isDate && <p>Bạn chưa chọn Ngày nhắc</p>}
-        {isInput.isTime && <p>Bạn chưa chọn Giờ nhắc</p>}
+        {isInput.isContent && (
+          <p className="alert-mes">Bạn chưa nhập Nội Dung</p>
+        )}
+        {isInput.isDate && <p className="alert-mes">Bạn chưa chọn Ngày nhắc</p>}
+        {isInput.isTime && <p className="alert-mes">Bạn chưa chọn Giờ nhắc</p>}
       </div>
     </div>
   );
