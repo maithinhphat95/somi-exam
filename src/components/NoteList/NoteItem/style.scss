@@ -1,0 +1,21 @@
+.note-item {
+  position: relative;
+  * {
+    margin: 0;
+  }
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  .remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+  }
+}
+.active {
+  background-color: pink;
+}
