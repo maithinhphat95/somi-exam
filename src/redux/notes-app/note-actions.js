@@ -26,7 +26,7 @@ const fetchData = (data) => {
   };
 };
 // Action get data from localstorage
-export const fetchRequest = () => {
+export const fetchRequest = async () => {
   return (dispatch) => {
     (async () => {
       console.log("thực thi call api");
@@ -47,19 +47,6 @@ const updateData = (data) => {
   };
 };
 // Action set data to local sotrage after update list
-// export const updateDataRequest = (data) => {
-//   return (dispatch) => {
-//     (async () => {
-//       try {
-//         await localStorage.setItem("data", data);
-//         dispatch(updateData(data));
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     })();
-//   };
-// };
-
 export const updateDataRequest = (data) => {
   return (dispatch) => {
     (async () => {
