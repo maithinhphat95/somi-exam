@@ -1,6 +1,6 @@
+import * as actionType from "./notes-app/note-types";
 import { combineReducers } from "redux";
 import noteReducer from "./notes-app/note-reducers";
-// const { combineReducers } = require("redux");
 
 const rootReducer = combineReducers({
   note: noteReducer,

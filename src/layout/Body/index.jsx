@@ -12,10 +12,9 @@ function Body(props) {
   let dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem("data")) {
-      dispatch(fetchRequest());
+      // dispatch(fetchRequest());    // Temporary disable fetch API request
     }
   }, [localStorage.getItem("data")]);
-
   const noteList = useSelector((state) => state.note.noteList);
 
   return (

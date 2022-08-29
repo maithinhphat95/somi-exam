@@ -6,7 +6,6 @@ import {
   updateDataRequest,
 } from "../../../redux/notes-app/note-actions";
 NoteItem.propTypes = {};
-
 function NoteItem(props) {
   const { noteItem } = props;
   const dispatch = useDispatch();
@@ -14,6 +13,7 @@ function NoteItem(props) {
 
   let active = false;
   let today = new Date();
+
   if (
     parseInt(noteItem.noteDate.slice(5, 7)) == today.getMonth() + 1 &&
     parseInt(noteItem.noteDate.slice(8, 10)) == today.getDate()
@@ -24,6 +24,7 @@ function NoteItem(props) {
   const handleRemoveNote = () => {
     // let action = removeNote(noteItem);
     // dispatch(action);
+
     let newList =
       noteList.length == 0
         ? []

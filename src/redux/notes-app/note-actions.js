@@ -1,4 +1,5 @@
 import * as actionType from "./note-types";
+
 // Action add a note to notelist
 export const addNote = (noteItem) => {
   return {
@@ -18,6 +19,7 @@ export const removeNote = (noteItem) => {
     payload: noteItem.noteId,
   };
 };
+
 // Action save data from LocalStorage to the store
 const fetchData = (data) => {
   return {
@@ -47,12 +49,13 @@ const updateData = (data) => {
   };
 };
 // Action set data to local sotrage after update list
-export const updateDataRequest = (data) => {
+export const updateDataRequest = (list, item) => {
   return (dispatch) => {
     (async () => {
       try {
-        await localStorage.setItem("data", JSON.stringify(data));
-        dispatch(updateData(data));
+        await localStorage.setItem("data", JSON.stringify(list));
+        dispatch(updateData(list));
+        // dispatch(addNote(item));
       } catch (error) {
         console.log(error);
       }

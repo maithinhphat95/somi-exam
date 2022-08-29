@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, updateDataRequest } from "../../redux/notes-app/note-actions";
+// import { addJobRequest, callApiRequest } from "../../redux/store";
 import "./style.scss";
 
 FormAddNote.propTypes = {};
@@ -82,9 +83,9 @@ function FormAddNote(props) {
       let newNote = { ...noteItem, noteId: id };
       const action = addNote(newNote);
       dispatch(addNote(newNote));
-
       let newList = [...noteList, { ...noteItem, noteId: id }];
-      dispatch(updateDataRequest(newList));
+      dispatch(updateDataRequest(newList, newNote));
+      // dispatch(addJobRequest([...noteList, newNote]));
     }
   };
 
