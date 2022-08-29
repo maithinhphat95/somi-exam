@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { updateDataRequest } from "../../redux/notes-app/note-actions";
-import PropTypes from "prop-types";
+import { addNote, updateDataRequest } from "../../redux/notes-app/note-actions";
 import "./style.scss";
 
 FormAddNote.propTypes = {};
@@ -81,10 +79,11 @@ function FormAddNote(props) {
     } else {
       let id =
         noteList.length === 0 ? 0 : noteList[noteList.length - 1].noteId + 1;
-      // let newNote = { ...noteItem, noteId: id };
-      // const action = addNote(newNote);
+      let newNote = { ...noteItem, noteId: id };
+      const action = addNote(newNote);
+      dispatch(addNote(newNote));
+
       let newList = [...noteList, { ...noteItem, noteId: id }];
-      console.log(newList);
       dispatch(updateDataRequest(newList));
     }
   };
