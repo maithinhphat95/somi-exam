@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import FormAddNote from "../../components/NoteAddForm";
 import NoteList from "../../components/NoteList";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchRequest } from "../../redux/notes-app/note-actions";
 import "./style.scss";
 Body.propTypes = {};
 
 function Body(props) {
+  // Hook
+  let dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem("data")) {
+      dispatch(fetchRequest());
+    }
+  }, [localStorage.getItem("data")]);
+
   const noteList = useSelector((state) => state.note.noteList);
 
   return (

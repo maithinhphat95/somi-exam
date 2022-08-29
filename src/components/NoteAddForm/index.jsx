@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addNote } from "../../redux/notes-app/note-actions";
+import { updateDataRequest } from "../../redux/notes-app/note-actions";
 import PropTypes from "prop-types";
 import "./style.scss";
 
@@ -35,7 +35,9 @@ function FormAddNote(props) {
         break;
       // Handle input date note
       case "noteDate":
-        if (value >= today.toISOString().split("T")[0]) {
+        let date1 = new Date(`${value} 23:59:59`);
+        // if (value >= today.toISOString().split("T")[0])
+        if (date1 - today > 0) {
           setNote({ ...note, [name]: value });
           setIsInput({ ...isInput, isDate: false });
         } else {
@@ -79,9 +81,11 @@ function FormAddNote(props) {
     } else {
       let id =
         noteList.length === 0 ? 0 : noteList[noteList.length - 1].noteId + 1;
-      let newNote = { ...noteItem, noteId: id };
-      const action = addNote(newNote);
-      dispatch(action);
+      // let newNote = { ...noteItem, noteId: id };
+      // const action = addNote(newNote);
+      let newList = [...noteList, { ...noteItem, noteId: id }];
+      console.log(newList);
+      dispatch(updateDataRequest(newList));
     }
   };
 

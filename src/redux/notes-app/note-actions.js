@@ -18,20 +18,57 @@ export const removeNote = (noteItem) => {
     payload: noteItem.noteId,
   };
 };
-// Action fetdata from LocalStorage
-const fetchData = (list) => {
+// Action save data from LocalStorage to the store
+const fetchData = (data) => {
   return {
     type: actionType.FETCH_DATA,
-    payload: list,
+    payload: data,
   };
 };
-
-// export const fetchRequest = () => {
+// Action get data from localstorage
+export const fetchRequest = () => {
+  return (dispatch) => {
+    (async () => {
+      console.log("thực thi call api");
+      try {
+        const data = await JSON.parse(localStorage.getItem("data"));
+        dispatch(fetchData(data));
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  };
+};
+// Action update data after add / remove the note of note list
+const updateData = (data) => {
+  return {
+    type: actionType.UPDATE_DATA,
+    payload: data,
+  };
+};
+// Action set data to local sotrage after update list
+// export const updateDataRequest = (data) => {
 //   return (dispatch) => {
-//       (async () => {
-//           try {
-//        s
-//         }
+//     (async () => {
+//       try {
+//         await localStorage.setItem("data", data);
+//         dispatch(updateData(data));
+//       } catch (error) {
+//         console.log(error);
+//       }
 //     })();
 //   };
 // };
+
+export const updateDataRequest = (data) => {
+  return (dispatch) => {
+    (async () => {
+      try {
+        await localStorage.setItem("data", JSON.stringify(data));
+        dispatch(updateData(data));
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  };
+};

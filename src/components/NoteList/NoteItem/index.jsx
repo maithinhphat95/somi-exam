@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
-import { removeNote } from "../../../redux/notes-app/note-actions";
+import {
+  removeNote,
+  updateDataRequest,
+} from "../../../redux/notes-app/note-actions";
 NoteItem.propTypes = {};
 
 function NoteItem(props) {
   const { noteItem } = props;
   const dispatch = useDispatch();
+  const noteList = useSelector((state) => state.note.noteList);
+
   let active = false;
   let today = new Date();
   if (
@@ -18,9 +22,14 @@ function NoteItem(props) {
   }
 
   const handleRemoveNote = () => {
-    let action = removeNote(noteItem);
-    dispatch(action);
-    console.log(action);
+    // let action = removeNote(noteItem);
+    // dispatch(action);
+    let newList =
+      noteList.length == 0
+        ? []
+        : noteList.filter((item) => item.noteId != noteItem.noteId);
+    updateDataRequest(newList);
+    console.log(updateDataRequest);
   };
   return (
     <div className={`note-item ${active ? "active" : null}`}>
